@@ -10,11 +10,8 @@ LOCATION="westeurope"
 # Location code will be used to setup multi-region resources
 LOCATION_CODE="weu"
 
-
 # Prefix is a combination of project and environment
 PREFIX="${ENVIRONMENT}${PROJECT_CODE}"
-
-
 
 # Azure subscription vars (uncomment if you will supply the values)
 SUBSCRIPTION_ID="REPLACE"
@@ -26,9 +23,6 @@ export RG_AKS_NODES="${PREFIX}-aks-nodes-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
 export RG_INFOSEC="central-infosec-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
 export RG_SHARED="${PREFIX}-shared-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
 export RG_DEVOPS="${PREFIX}-devops-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
-
-
-
 
 ### Virtual networks
 export PROJ_VNET_NAME="spoke-${PREFIX}-${SUBSCRIPTION_CODE}-${LOCATION_CODE}" 
@@ -44,28 +38,26 @@ export SVC_SUBNET_NAME="${PREFIX}-ingress"
 # 2046 allocated addresses (from 8.0 to 15.255)
 export PROJ_VNET_ADDRESS_SPACE_1="10.165.8.0/21" 
 # 2046 allocated addresses (from 16.0 to 23.255)
- export PROJ_VNET_ADDRESS_SPACE_2="10.165.16.0/21" 
+export PROJ_VNET_ADDRESS_SPACE_2="10.165.16.0/21" 
 # Incase you need the next address space, you can use this
 # export PROJ_VNET_ADDRESS_SPACE_3="10.165.24.0/22" 
 
 # This /21 size would support around 60 node cluster (given that 30 pods/cluster is used)
 
- export AKS_SUBNET_IP_PREFIX="10.165.8.0/21" 
- export VN_SUBNET_IP_PREFIX="10.165.16.0/22" 
+export AKS_SUBNET_IP_PREFIX="10.165.8.0/21" 
+export VN_SUBNET_IP_PREFIX="10.165.16.0/22" 
 
- export SVC_SUBNET_IP_PREFIX="10.165.20.0/24" 
+export SVC_SUBNET_IP_PREFIX="10.165.20.0/24" 
 
- export APIM_HOSTED_SUBNET_IP_PREFIX="10.165.21.0/24" 
+export APIM_HOSTED_SUBNET_IP_PREFIX="10.165.21.0/24" 
 
- export PROJ_DEVOPS_AGENTS_SUBNET_IP_PREFIX="10.165.22.0/24" 
+export PROJ_DEVOPS_AGENTS_SUBNET_IP_PREFIX="10.165.22.0/24" 
 
- export PRIVATE_ENDPOINTS_SUBNET_NAME="10.165.23.0/24" 
+export PRIVATE_ENDPOINTS_SUBNET_NAME="10.165.23.0/24" 
 
 # 2048 allocated addresses (from 0.0 to 7.255)
 
- export HUB_EXT_VNET_ADDRESS_SPACE="10.165.0.0/21" 
-
-
+export HUB_EXT_VNET_ADDRESS_SPACE="10.165.0.0/21" 
 
 ### AAD Integration
 
@@ -251,7 +243,6 @@ az network vnet subnet create \
     --name $SVC_SUBNET_NAME \
     --address-prefix $SVC_SUBNET_IP_PREFIX
 
-
 # Create subnet for kubernetes exposed services (usually by internal load-balancer)
 # Good security practice to isolate exposed services from the internal services
 az network vnet subnet create \
@@ -259,8 +250,6 @@ az network vnet subnet create \
     --vnet-name $PROJ_VNET_NAME \
     --name $SVC_SUBNET_NAME \
     --address-prefix $SVC_SUBNET_IP_PREFIX
-
-
 
 # Get the id for project vnet.
 PROJ_VNET_ID=$(az network vnet show \
@@ -276,7 +265,6 @@ az network public-ip create \
     --tags $TAG_ENV $TAG_PROJ_CODE $TAG_DEPT_IT $TAG_STATUS_EXP
 
 echo "AKS Public IP Scripts Execution Completed"
-
 
 az aks get-versions -l $LOCATION -o table
 
@@ -297,15 +285,14 @@ AKS_PIP_ID=$(az network public-ip show -g $RG_AKS --name $AKS_PIP_NAME --query i
 
 AKS_SUBNET_ID=$(az network vnet subnet show -g $RG_SHARED --vnet-name $PROJ_VNET_NAME --name $AKS_SUBNET_NAME --query id -o tsv)
 
-
- az aks create \
+az aks create \
     --resource-group $RG_AKS \
     --name $AKS_CLUSTER_NAME \
     --location $LOCATION \
     --kubernetes-version '1.19.7' \
     --generate-ssh-keys \
     --load-balancer-outbound-ips $AKS_PIP_ID \
-    --vnet-subnet-id '/subscriptions/0dc9f1e8-88e9-4b66-9b2f-25f7c5b5ff0e/resourceGroups/devusta-shared-ent-weu/providers/Microsoft.Network/virtualNetworks/spok
+    --vnet-subnet-id '/subscriptions/xxxx-xxxx-xxxx-xxxx-xxxx/resourceGroups/devusta-shared-ent-weu/providers/Microsoft.Network/virtualNetworks/spok
 e-devusta-ent-weu/subnets/devusta-aks' \
     --network-plugin azure \
     --network-policy calico \
@@ -324,4 +311,3 @@ e-devusta-ent-weu/subnets/devusta-aks' \
     --zones 1  2 3 \
     --nodepool-labels app=system \
     --tags $TAG_ENV $TAG_PROJ_CODE $TAG_DEPT_IT $TAG_STATUS_EXP
-
