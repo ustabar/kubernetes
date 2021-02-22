@@ -19,7 +19,9 @@ PREFIX="${ENVIRONMENT}${PROJECT_CODE}"
 
 ### Resource groups
 export RG_AKS="${PREFIX}-aks-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
-export RG_SHARED="${PREFIX}-shared-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
+## export RG_SHARED="${PREFIX}-shared-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
+export RG_SHARED="${PREFIX}-aks-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
+export NODE_RG_AKS="${PREFIX}-node-${SUBSCRIPTION_CODE}-${LOCATION_CODE}"
 
 ### Delete resource group previously created!
 # az group delete -n $RG_AKS
@@ -288,8 +290,17 @@ export AKS_SUBNET_ID="/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RG_SHAR
 echo $AKS_VERSION
 #'1.19.7'
 
+MANAGED_IDENTITY=$(az identity create --name "mngIdentity" --resource-group ${RG_SHARED})
+echo $MANAGED_IDENTITY
+
+# Get the tenant ID
+MAN_ID=$(echo $MANAGED_IDENTITY | jq -r .id)
+
+az identity list --query "[].{Name:name, Id:id, Location:location}" -o table
+
 az aks create \
     --resource-group $RG_AKS \
+    --node-resource-group $NODE_RG_AKS \
     --name $AKS_CLUSTER_NAME \
     --location $LOCATION \
     --kubernetes-version "1.19.7" \
@@ -312,9 +323,17 @@ az aks create \
     --max-count 5 \
     --zones 1 2 3 \
     --nodepool-labels app=system \
+    --assign-identity $MAN_ID \
     --tags $TAG_ENV $TAG_PROJ_CODE $TAG_DEPT_IT $TAG_STATUS_EXP
 
 # To be able to run the script 
 # chmod +x aks-provision-edited.sh
 
 # Then run ./aks-provision-edited.sh
+
+# sudo nano ~/.kube/config 
+# kubectl config get-contexts
+
+# az group delete -n devaksdemo-aks-ent-weu
+# az group delete -n devaksdemo-shared-ent-weu
+# az group delete -n MC_devaksdemo-aks-ent-weu_devaksdemo-aks-ent-weu_westeurope
