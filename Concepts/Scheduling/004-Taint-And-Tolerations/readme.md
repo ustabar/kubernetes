@@ -163,5 +163,5 @@ $ kubectl get pods -o wide
 We can observe that the pods (that did not have the toleration against the **'key2=value2:NoExecution'** taint) terminated, just as we discussed at the start of this section.
 
 **References:**<br/><br/>
-https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
-https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/<br/><br/>
+https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/<br/><br/>
