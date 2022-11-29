@@ -60,5 +60,5 @@ $ kubectl get pods -o wide
 
 As we can see the pod is scheduled on mycluster-worker, which is what we were trying to accomplish.
 
-References:<br/><br/>
+**References:**<br/><br/>
 https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
