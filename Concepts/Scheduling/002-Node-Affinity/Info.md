@@ -16,7 +16,7 @@ Old pods which were already running on nodes before labels were applied will con
 With an example. Removing the old pod and changing its definition:
 
 ``` shell
-$ nano node-affinity.yaml
+$ nano node-affinity-with-required.yaml
 
 apiVersion: v1
 kind: Pod
@@ -37,7 +37,7 @@ spec:
   - name: nginx-container
     image: nginx
 
-$ kubectl create -f node-affinity.yaml
+$ kubectl create -f node-affinity-with-required.yaml
 
 $ kubectl get pods -o wide
 ```
@@ -58,7 +58,7 @@ Next, let's delete the old pod with "kubectl delete pod <yourPodName>" and try t
 Let's do this with the help of "preferredDuringSchedulingIgnoredDuringExecution" node affinity.
 
 ``` shell
-$ nano node-affinity.yaml
+$ nano node-affinity-with-preffered.yaml
 
 apiVersion: v1
 kind: Pod
@@ -88,7 +88,7 @@ Try creating a pod with this yaml and you'll notice that the pod will be schedul
 even though no nodes have labels exactly as defined in the pod definition.
 
 ``` shell
-$ kubectl apply -f node-affinity.yaml
+$ kubectl apply -f node-affinity-with-preffered.yaml
 
 $ kubectl get pods -o wide
 ```
