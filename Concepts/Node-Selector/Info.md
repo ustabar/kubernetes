@@ -4,7 +4,7 @@ This is achieved by using a direct match of key-value pairs against pods and nod
 Let us take an example. Suppose we have a node named "node01" in our k8s cluster. 
 We can get this information with the command mentioned below:
 
-``` s
+``` shell
 $ kubectl get nodes
 NAME                      STATUS   ROLES           AGE   VERSION
 mycluster-control-plane   Ready    control-plane   95d   v1.24.0
@@ -17,7 +17,7 @@ Now we would want to assign a label to node "node01" in the form of key-value pa
 Suppose we want to assign a label with the key "diskCapacity" and with the value "high". 
 The command to achieve this will be:
 
-``` s
+``` shell
 $ kubectl label node mycluster-worker diskCapacity=high
 $ kubectl describe node mycluster-worker
 Name:               mycluster-worker
@@ -36,7 +36,7 @@ Annotations:        kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containe
 We have successfully labelled our node.
 Now for our pod to run on this node we need to specify a "nodeSelector" field under the "spec" field of the pod definition.
 
-``` s
+``` shell
 $ nano node-selector.yaml
 
 apiVersion: v1
