@@ -15,7 +15,7 @@ Old pods which were already running on nodes before labels were applied will con
 
 With an example. Removing the old pod and changing its definition:
 
-``` s
+``` shell
 $ nano node-affinity.yaml
 
 apiVersion: v1
