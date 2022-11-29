@@ -17,11 +17,11 @@ We can check using the **'kubectl describe node <nodeName>'** command.
 A taint comprises three parts: a **key**, a **value**, and an **effect**.
 
 Key and value could be anything you want, but the effect can be one of the following. <br/><br/>
-**NoSchedule:** If pod/s do not tolerate these, then k8 will not schedule those pods on the tainted nodes with this effect.
+**NoSchedule:**<br/> If pod/s do not tolerate these, then k8 will not schedule those pods on the tainted nodes with this effect.
 
-**PreferNoSchedule:** This acts as a soft version of ‘NoSchedule.’ If the pod/s do not tolerate these, then k8 will prefer not to schedule those pods on the tainted nodes with this effect.
+**PreferNoSchedule:**<br/> This acts as a soft version of ‘NoSchedule.’ If the pod/s do not tolerate these, then k8 will prefer not to schedule those pods on the tainted nodes with this effect.
 
-**NoExecute:** This will make k8 not schedule pods without matching tolerations on the tainted nodes and will also remove already running pods from that node that do not have the matching tolerations to this effect.
+**NoExecute:**<br/> This will make k8 not schedule pods without matching tolerations on the tainted nodes and will also remove already running pods from that node that do not have the matching tolerations to this effect.
 
 Now that we know the structure of a taint let us taint our nodes with the following commands.
 
