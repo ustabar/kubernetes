@@ -5,11 +5,11 @@ This gives the scheduler the ability to schedule pods even if labels are not exa
 
 The two types of node affinity currently available are:
 
-** requiredDuringSchedulingIgnoredDuringExecution: **
+**requiredDuringSchedulingIgnoredDuringExecution:**
 Only schedules a new pod if the rules match; else the pod will go in a pending state. 
 Old pods which were already running on nodes before labels were applied will continue to run.
 
-** preferredDuringSchedulingIgnoredDuringExecution: **
+**preferredDuringSchedulingIgnoredDuringExecution:**
 Will try to match a pod to a node but if no exact match found, it will still schedule the pod to a node. 
 Old pods which were already running on nodes before labels were applied will continue to run.
 
