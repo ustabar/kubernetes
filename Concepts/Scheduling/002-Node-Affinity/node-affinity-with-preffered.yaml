@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  affinity:
+    nodeAffinity:
+      prefferedDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        prefference:
+        - matchExpressions:
+          - key: diskCapacity
+            operator: In
+            values:
+            - low
+            - medium
+  containers:
+  - name: nginx-container
+    image: nginx
