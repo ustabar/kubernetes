@@ -5,7 +5,7 @@
 
 [Kubernetes Basics: Pods, Nodes, Containers, Deployments and Clusters](https://www.youtube.com/watch?v=B_X4l4HSgtc)
 
-[Whay shall I learn Kubernetes](https://www.youtube.com/playlist?list=PLj-2elZxVPZ8U5_gxuF_GFWelIo9kFlAj)
+[Why shall I learn Kubernetes?](https://www.youtube.com/playlist?list=PLj-2elZxVPZ8U5_gxuF_GFWelIo9kFlAj)
 
 # Docker
 [Docker vs Containerd: Understanding the Differences and Choosing the Right Containerization Tool](https://www.youtube.com/watch?v=21onkZfL2yM)
