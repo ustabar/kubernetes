@@ -14,9 +14,7 @@
 
 [Container Training-1](https://container.training/)
 [Container Training-2](https://wwrk-2019-06.container.training/#1)
-
 [Kubernetes Hands On Lab](https://github.com/ustabar/HOL-AKS)
-
 [Play with docker](https://training.play-with-docker.com/orchestration-hol/)
 [Learn Docker hands labs](https://www.docker.com/blog/learn-docker-hands-labs/)
 [Docker networking](https://github.com/docker/labs/blob/master/networking/tutorials.md)
